@@ -1,0 +1,352 @@
+2025-10-11 19:03:46 | PID 538531 | RSS   236.8 MB | Starting loop
+2025-10-11 19:03:46 | PID 538531 | RSS   236.8 MB | ITER 0 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:03:46 | PID 538531 | RSS   236.8 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:03:46 | PID 538531 | RSS   236.8 MB | masked_img created
+2025-10-11 19:03:46 | PID 538531 | RSS   237.0 MB | wrote tmp image /tmp/tmpf26iomc6.jpg ok=True
+2025-10-11 19:03:51 | PID 538531 | RSS   237.0 MB | VLM returned in 4.87s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:03:51 | PID 538531 | RSS   237.0 MB | tmp file removed
+2025-10-11 19:03:51 | PID 538531 | RSS   237.0 MB | deltas computed
+2025-10-11 19:03:51 | PID 538531 | RSS   237.0 MB | fm_mean shape (1,)
+2025-10-11 19:03:51 | PID 538531 | RSS   237.8 MB | GP fit done
+2025-10-11 19:03:51 | PID 538531 | RSS   240.0 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:03:51 | PID 538531 | RSS   240.0 MB | mu.size=50176 expected=50176
+2025-10-11 19:03:52 | PID 538531 | RSS   241.6 MB | plotted
+2025-10-11 19:03:52 | PID 538531 | RSS   241.6 MB | ITER 1 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:03:52 | PID 538531 | RSS   241.6 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:03:52 | PID 538531 | RSS   241.6 MB | masked_img created
+2025-10-11 19:03:52 | PID 538531 | RSS   241.6 MB | wrote tmp image /tmp/tmpvdlt2eri.jpg ok=True
+2025-10-11 19:03:58 | PID 538531 | RSS   241.6 MB | VLM returned in 6.09s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:03:58 | PID 538531 | RSS   241.6 MB | tmp file removed
+2025-10-11 19:03:58 | PID 538531 | RSS   241.6 MB | deltas computed
+2025-10-11 19:03:58 | PID 538531 | RSS   241.6 MB | fm_mean shape (1,)
+2025-10-11 19:03:58 | PID 538531 | RSS   241.6 MB | GP fit done
+2025-10-11 19:03:58 | PID 538531 | RSS   242.9 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:03:58 | PID 538531 | RSS   242.9 MB | mu.size=50176 expected=50176
+2025-10-11 19:03:58 | PID 538531 | RSS   242.9 MB | ITER 2 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:03:58 | PID 538531 | RSS   242.9 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:03:58 | PID 538531 | RSS   242.9 MB | masked_img created
+2025-10-11 19:03:58 | PID 538531 | RSS   242.9 MB | wrote tmp image /tmp/tmpi5gk9d9w.jpg ok=True
+2025-10-11 19:04:04 | PID 538531 | RSS   242.9 MB | VLM returned in 5.83s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:04 | PID 538531 | RSS   242.9 MB | tmp file removed
+2025-10-11 19:04:04 | PID 538531 | RSS   242.9 MB | deltas computed
+2025-10-11 19:04:04 | PID 538531 | RSS   242.9 MB | fm_mean shape (1,)
+2025-10-11 19:04:04 | PID 538531 | RSS   242.9 MB | GP fit done
+2025-10-11 19:04:04 | PID 538531 | RSS   244.0 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:04 | PID 538531 | RSS   244.0 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:04 | PID 538531 | RSS   244.0 MB | ITER 3 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:04 | PID 538531 | RSS   244.0 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:04 | PID 538531 | RSS   244.0 MB | masked_img created
+2025-10-11 19:04:04 | PID 538531 | RSS   244.0 MB | wrote tmp image /tmp/tmp8cmy9bog.jpg ok=True
+2025-10-11 19:04:09 | PID 538531 | RSS   244.0 MB | VLM returned in 5.53s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:09 | PID 538531 | RSS   244.0 MB | tmp file removed
+2025-10-11 19:04:09 | PID 538531 | RSS   244.0 MB | deltas computed
+2025-10-11 19:04:09 | PID 538531 | RSS   244.0 MB | fm_mean shape (1,)
+2025-10-11 19:04:09 | PID 538531 | RSS   244.0 MB | GP fit done
+2025-10-11 19:04:09 | PID 538531 | RSS   244.0 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:09 | PID 538531 | RSS   244.0 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:09 | PID 538531 | RSS   248.2 MB | plotted
+2025-10-11 19:04:09 | PID 538531 | RSS   248.2 MB | ITER 4 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:09 | PID 538531 | RSS   248.2 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:09 | PID 538531 | RSS   248.2 MB | masked_img created
+2025-10-11 19:04:09 | PID 538531 | RSS   248.2 MB | wrote tmp image /tmp/tmplr8zbfcu.jpg ok=True
+2025-10-11 19:04:14 | PID 538531 | RSS   248.2 MB | VLM returned in 4.46s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:14 | PID 538531 | RSS   248.2 MB | tmp file removed
+2025-10-11 19:04:14 | PID 538531 | RSS   248.2 MB | deltas computed
+2025-10-11 19:04:14 | PID 538531 | RSS   248.2 MB | fm_mean shape (1,)
+2025-10-11 19:04:14 | PID 538531 | RSS   248.2 MB | GP fit done
+2025-10-11 19:04:14 | PID 538531 | RSS   241.7 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:14 | PID 538531 | RSS   241.7 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:14 | PID 538531 | RSS   241.7 MB | ITER 5 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:14 | PID 538531 | RSS   241.7 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:14 | PID 538531 | RSS   241.7 MB | masked_img created
+2025-10-11 19:04:14 | PID 538531 | RSS   241.7 MB | wrote tmp image /tmp/tmpft905kor.jpg ok=True
+2025-10-11 19:04:20 | PID 538531 | RSS   241.7 MB | VLM returned in 5.85s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:20 | PID 538531 | RSS   241.7 MB | tmp file removed
+2025-10-11 19:04:20 | PID 538531 | RSS   241.7 MB | deltas computed
+2025-10-11 19:04:20 | PID 538531 | RSS   241.7 MB | fm_mean shape (1,)
+2025-10-11 19:04:20 | PID 538531 | RSS   241.7 MB | GP fit done
+2025-10-11 19:04:20 | PID 538531 | RSS   242.9 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:20 | PID 538531 | RSS   242.9 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:20 | PID 538531 | RSS   242.9 MB | ITER 6 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:20 | PID 538531 | RSS   242.9 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:20 | PID 538531 | RSS   242.9 MB | masked_img created
+2025-10-11 19:04:20 | PID 538531 | RSS   242.9 MB | wrote tmp image /tmp/tmp88rb1sn7.jpg ok=True
+2025-10-11 19:04:25 | PID 538531 | RSS   242.9 MB | VLM returned in 5.32s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:25 | PID 538531 | RSS   242.9 MB | tmp file removed
+2025-10-11 19:04:25 | PID 538531 | RSS   242.9 MB | deltas computed
+2025-10-11 19:04:25 | PID 538531 | RSS   242.9 MB | fm_mean shape (1,)
+2025-10-11 19:04:25 | PID 538531 | RSS   242.9 MB | GP fit done
+2025-10-11 19:04:25 | PID 538531 | RSS   244.1 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:25 | PID 538531 | RSS   244.1 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:25 | PID 538531 | RSS   248.4 MB | plotted
+2025-10-11 19:04:25 | PID 538531 | RSS   248.4 MB | ITER 7 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:25 | PID 538531 | RSS   248.4 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:25 | PID 538531 | RSS   248.4 MB | masked_img created
+2025-10-11 19:04:25 | PID 538531 | RSS   248.4 MB | wrote tmp image /tmp/tmphggdfmr0.jpg ok=True
+2025-10-11 19:04:30 | PID 538531 | RSS   248.4 MB | VLM returned in 5.01s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:30 | PID 538531 | RSS   248.4 MB | tmp file removed
+2025-10-11 19:04:30 | PID 538531 | RSS   248.4 MB | deltas computed
+2025-10-11 19:04:30 | PID 538531 | RSS   248.4 MB | fm_mean shape (1,)
+2025-10-11 19:04:30 | PID 538531 | RSS   248.4 MB | GP fit done
+2025-10-11 19:04:30 | PID 538531 | RSS   242.3 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:30 | PID 538531 | RSS   242.3 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:30 | PID 538531 | RSS   242.3 MB | ITER 8 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:30 | PID 538531 | RSS   242.3 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:30 | PID 538531 | RSS   242.3 MB | masked_img created
+2025-10-11 19:04:30 | PID 538531 | RSS   242.3 MB | wrote tmp image /tmp/tmp_9l6r4wg.jpg ok=True
+2025-10-11 19:04:35 | PID 538531 | RSS   242.3 MB | VLM returned in 5.21s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:35 | PID 538531 | RSS   242.3 MB | tmp file removed
+2025-10-11 19:04:35 | PID 538531 | RSS   242.3 MB | deltas computed
+2025-10-11 19:04:35 | PID 538531 | RSS   242.3 MB | fm_mean shape (1,)
+2025-10-11 19:04:35 | PID 538531 | RSS   242.3 MB | GP fit done
+2025-10-11 19:04:35 | PID 538531 | RSS   243.8 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:35 | PID 538531 | RSS   243.8 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:35 | PID 538531 | RSS   243.8 MB | ITER 9 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:35 | PID 538531 | RSS   243.8 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:35 | PID 538531 | RSS   243.8 MB | masked_img created
+2025-10-11 19:04:35 | PID 538531 | RSS   243.8 MB | wrote tmp image /tmp/tmpzxk5f2z5.jpg ok=True
+2025-10-11 19:04:40 | PID 538531 | RSS   243.8 MB | VLM returned in 4.91s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:40 | PID 538531 | RSS   243.8 MB | tmp file removed
+2025-10-11 19:04:40 | PID 538531 | RSS   243.8 MB | deltas computed
+2025-10-11 19:04:40 | PID 538531 | RSS   243.8 MB | fm_mean shape (1,)
+2025-10-11 19:04:40 | PID 538531 | RSS   243.8 MB | GP fit done
+2025-10-11 19:04:40 | PID 538531 | RSS   244.6 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:40 | PID 538531 | RSS   244.6 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:41 | PID 538531 | RSS   242.6 MB | plotted
+2025-10-11 19:04:41 | PID 538531 | RSS   242.6 MB | ITER 10 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:41 | PID 538531 | RSS   242.6 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:41 | PID 538531 | RSS   242.6 MB | masked_img created
+2025-10-11 19:04:41 | PID 538531 | RSS   242.6 MB | wrote tmp image /tmp/tmpv2h0vpw8.jpg ok=True
+2025-10-11 19:04:45 | PID 538531 | RSS   242.6 MB | VLM returned in 4.79s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:45 | PID 538531 | RSS   242.6 MB | tmp file removed
+2025-10-11 19:04:45 | PID 538531 | RSS   242.6 MB | deltas computed
+2025-10-11 19:04:45 | PID 538531 | RSS   242.6 MB | fm_mean shape (1,)
+2025-10-11 19:04:45 | PID 538531 | RSS   242.6 MB | GP fit done
+2025-10-11 19:04:45 | PID 538531 | RSS   244.1 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:45 | PID 538531 | RSS   244.1 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:45 | PID 538531 | RSS   244.1 MB | ITER 11 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:45 | PID 538531 | RSS   244.1 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:45 | PID 538531 | RSS   244.1 MB | masked_img created
+2025-10-11 19:04:45 | PID 538531 | RSS   244.1 MB | wrote tmp image /tmp/tmpb14p__9b.jpg ok=True
+2025-10-11 19:04:54 | PID 538531 | RSS   244.1 MB | VLM returned in 8.49s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:54 | PID 538531 | RSS   244.1 MB | tmp file removed
+2025-10-11 19:04:54 | PID 538531 | RSS   244.1 MB | deltas computed
+2025-10-11 19:04:54 | PID 538531 | RSS   244.1 MB | fm_mean shape (1,)
+2025-10-11 19:04:54 | PID 538531 | RSS   244.1 MB | GP fit done
+2025-10-11 19:04:54 | PID 538531 | RSS   244.8 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:54 | PID 538531 | RSS   244.8 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:54 | PID 538531 | RSS   244.8 MB | ITER 12 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:54 | PID 538531 | RSS   244.8 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:54 | PID 538531 | RSS   244.8 MB | masked_img created
+2025-10-11 19:04:54 | PID 538531 | RSS   244.8 MB | wrote tmp image /tmp/tmp0347x7qf.jpg ok=True
+2025-10-11 19:04:59 | PID 538531 | RSS   244.8 MB | VLM returned in 4.90s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:04:59 | PID 538531 | RSS   244.8 MB | tmp file removed
+2025-10-11 19:04:59 | PID 538531 | RSS   244.8 MB | deltas computed
+2025-10-11 19:04:59 | PID 538531 | RSS   244.8 MB | fm_mean shape (1,)
+2025-10-11 19:04:59 | PID 538531 | RSS   244.8 MB | GP fit done
+2025-10-11 19:04:59 | PID 538531 | RSS   244.8 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:04:59 | PID 538531 | RSS   244.8 MB | mu.size=50176 expected=50176
+2025-10-11 19:04:59 | PID 538531 | RSS   248.8 MB | plotted
+2025-10-11 19:04:59 | PID 538531 | RSS   248.8 MB | ITER 13 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:04:59 | PID 538531 | RSS   248.8 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:04:59 | PID 538531 | RSS   248.8 MB | masked_img created
+2025-10-11 19:04:59 | PID 538531 | RSS   248.8 MB | wrote tmp image /tmp/tmpqjv5eezs.jpg ok=True
+2025-10-11 19:05:04 | PID 538531 | RSS   248.8 MB | VLM returned in 5.20s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:05:04 | PID 538531 | RSS   248.8 MB | tmp file removed
+2025-10-11 19:05:04 | PID 538531 | RSS   248.8 MB | deltas computed
+2025-10-11 19:05:04 | PID 538531 | RSS   248.8 MB | fm_mean shape (1,)
+2025-10-11 19:05:04 | PID 538531 | RSS   248.8 MB | GP fit done
+2025-10-11 19:05:04 | PID 538531 | RSS   242.7 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:05:04 | PID 538531 | RSS   242.7 MB | mu.size=50176 expected=50176
+2025-10-11 19:05:04 | PID 538531 | RSS   242.7 MB | ITER 14 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:05:04 | PID 538531 | RSS   242.7 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:05:04 | PID 538531 | RSS   242.7 MB | masked_img created
+2025-10-11 19:05:04 | PID 538531 | RSS   242.7 MB | wrote tmp image /tmp/tmp291d6we4.jpg ok=True
+2025-10-11 19:05:09 | PID 538531 | RSS   242.7 MB | VLM returned in 4.39s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:05:09 | PID 538531 | RSS   242.7 MB | tmp file removed
+2025-10-11 19:05:09 | PID 538531 | RSS   242.7 MB | deltas computed
+2025-10-11 19:05:09 | PID 538531 | RSS   242.7 MB | fm_mean shape (1,)
+2025-10-11 19:05:09 | PID 538531 | RSS   242.7 MB | GP fit done
+2025-10-11 19:05:09 | PID 538531 | RSS   244.2 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:05:09 | PID 538531 | RSS   244.2 MB | mu.size=50176 expected=50176
+2025-10-11 19:05:09 | PID 538531 | RSS   244.2 MB | ITER 15 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:05:09 | PID 538531 | RSS   244.2 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:05:09 | PID 538531 | RSS   244.2 MB | masked_img created
+2025-10-11 19:05:09 | PID 538531 | RSS   244.2 MB | wrote tmp image /tmp/tmpvp5gmngd.jpg ok=True
+2025-10-11 19:05:13 | PID 538531 | RSS   244.2 MB | VLM returned in 4.39s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:05:13 | PID 538531 | RSS   244.2 MB | tmp file removed
+2025-10-11 19:05:13 | PID 538531 | RSS   244.2 MB | deltas computed
+2025-10-11 19:05:13 | PID 538531 | RSS   244.2 MB | fm_mean shape (1,)
+2025-10-11 19:05:13 | PID 538531 | RSS   244.2 MB | GP fit done
+2025-10-11 19:05:13 | PID 538531 | RSS   245.0 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:05:13 | PID 538531 | RSS   245.0 MB | mu.size=50176 expected=50176
+2025-10-11 19:05:13 | PID 538531 | RSS   243.0 MB | plotted
+2025-10-11 19:05:13 | PID 538531 | RSS   243.0 MB | ITER 16 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:05:13 | PID 538531 | RSS   243.0 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:05:13 | PID 538531 | RSS   243.0 MB | masked_img created
+2025-10-11 19:05:13 | PID 538531 | RSS   243.0 MB | wrote tmp image /tmp/tmptxvr1neb.jpg ok=True
+2025-10-11 19:05:18 | PID 538531 | RSS   243.0 MB | VLM returned in 4.58s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:05:18 | PID 538531 | RSS   243.0 MB | tmp file removed
+2025-10-11 19:05:18 | PID 538531 | RSS   243.0 MB | deltas computed
+2025-10-11 19:05:18 | PID 538531 | RSS   243.0 MB | fm_mean shape (1,)
+2025-10-11 19:05:18 | PID 538531 | RSS   243.0 MB | GP fit done
+2025-10-11 19:05:18 | PID 538531 | RSS   244.4 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:05:18 | PID 538531 | RSS   244.4 MB | mu.size=50176 expected=50176
+2025-10-11 19:05:18 | PID 538531 | RSS   244.4 MB | ITER 17 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:05:18 | PID 538531 | RSS   244.4 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:05:18 | PID 538531 | RSS   244.4 MB | masked_img created
+2025-10-11 19:05:18 | PID 538531 | RSS   244.4 MB | wrote tmp image /tmp/tmpnw2j3rv9.jpg ok=True
+2025-10-11 19:05:24 | PID 538531 | RSS   244.4 MB | VLM returned in 6.34s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:05:24 | PID 538531 | RSS   244.4 MB | tmp file removed
+2025-10-11 19:05:24 | PID 538531 | RSS   244.4 MB | deltas computed
+2025-10-11 19:05:24 | PID 538531 | RSS   244.4 MB | fm_mean shape (1,)
+2025-10-11 19:05:24 | PID 538531 | RSS   244.4 MB | GP fit done
+2025-10-11 19:05:24 | PID 538531 | RSS   245.0 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:05:24 | PID 538531 | RSS   245.0 MB | mu.size=50176 expected=50176
+2025-10-11 19:05:24 | PID 538531 | RSS   245.0 MB | ITER 18 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:05:24 | PID 538531 | RSS   245.0 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:05:24 | PID 538531 | RSS   245.0 MB | masked_img created
+2025-10-11 19:05:24 | PID 538531 | RSS   245.0 MB | wrote tmp image /tmp/tmp8zl5hxed.jpg ok=True
+2025-10-11 19:05:29 | PID 538531 | RSS   245.0 MB | VLM returned in 4.91s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:05:29 | PID 538531 | RSS   245.0 MB | tmp file removed
+2025-10-11 19:05:29 | PID 538531 | RSS   245.0 MB | deltas computed
+2025-10-11 19:05:29 | PID 538531 | RSS   245.0 MB | fm_mean shape (1,)
+2025-10-11 19:05:29 | PID 538531 | RSS   245.0 MB | GP fit done
+2025-10-11 19:05:29 | PID 538531 | RSS   245.0 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:05:29 | PID 538531 | RSS   245.0 MB | mu.size=50176 expected=50176
+2025-10-11 19:05:29 | PID 538531 | RSS   248.7 MB | plotted
+2025-10-11 19:05:29 | PID 538531 | RSS   248.7 MB | ITER 19 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:05:29 | PID 538531 | RSS   248.7 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:05:29 | PID 538531 | RSS   248.7 MB | masked_img created
+2025-10-11 19:05:29 | PID 538531 | RSS   248.7 MB | wrote tmp image /tmp/tmp1_khpe2w.jpg ok=True
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | VLM returned in 5.52s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | tmp file removed
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | deltas computed
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | fm_mean shape (1,)
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | GP fit done
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | mu.size=50176 expected=50176
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | ITER 20 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | masked_img created
+2025-10-11 19:05:35 | PID 538531 | RSS   248.7 MB | wrote tmp image /tmp/tmpa3fb_xfs.jpg ok=True
+2025-10-11 19:05:40 | PID 538531 | RSS   248.7 MB | VLM returned in 5.01s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:05:40 | PID 538531 | RSS   248.7 MB | tmp file removed
+2025-10-11 19:05:40 | PID 538531 | RSS   248.7 MB | deltas computed
+2025-10-11 19:05:40 | PID 538531 | RSS   248.7 MB | fm_mean shape (1,)
+2025-10-11 19:05:40 | PID 538531 | RSS   248.7 MB | GP fit done
+2025-10-11 19:05:40 | PID 538531 | RSS   243.1 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:05:40 | PID 538531 | RSS   243.1 MB | mu.size=50176 expected=50176
+2025-10-11 19:05:40 | PID 538531 | RSS   243.1 MB | ITER 21 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:05:40 | PID 538531 | RSS   243.1 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:05:40 | PID 538531 | RSS   243.1 MB | masked_img created
+2025-10-11 19:05:40 | PID 538531 | RSS   243.1 MB | wrote tmp image /tmp/tmp3u2bmo9h.jpg ok=True
+2025-10-11 19:05:45 | PID 538531 | RSS   243.1 MB | VLM returned in 4.80s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:05:45 | PID 538531 | RSS   243.1 MB | tmp file removed
+2025-10-11 19:05:45 | PID 538531 | RSS   243.1 MB | deltas computed
+2025-10-11 19:05:45 | PID 538531 | RSS   243.1 MB | fm_mean shape (1,)
+2025-10-11 19:05:45 | PID 538531 | RSS   243.1 MB | GP fit done
+2025-10-11 19:05:45 | PID 538531 | RSS   244.4 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:05:45 | PID 538531 | RSS   244.4 MB | mu.size=50176 expected=50176
+2025-10-11 19:05:45 | PID 538531 | RSS   248.8 MB | plotted
+2025-10-11 19:05:45 | PID 538531 | RSS   248.8 MB | ITER 22 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:05:45 | PID 538531 | RSS   248.8 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:05:45 | PID 538531 | RSS   248.8 MB | masked_img created
+2025-10-11 19:05:45 | PID 538531 | RSS   248.8 MB | wrote tmp image /tmp/tmpuv62nidf.jpg ok=True
+2025-10-11 19:05:49 | PID 538531 | RSS   248.8 MB | VLM returned in 4.60s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:05:49 | PID 538531 | RSS   248.8 MB | tmp file removed
+2025-10-11 19:05:49 | PID 538531 | RSS   248.8 MB | deltas computed
+2025-10-11 19:05:49 | PID 538531 | RSS   248.8 MB | fm_mean shape (1,)
+2025-10-11 19:05:49 | PID 538531 | RSS   248.8 MB | GP fit done
+2025-10-11 19:05:49 | PID 538531 | RSS   242.3 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:05:49 | PID 538531 | RSS   242.3 MB | mu.size=50176 expected=50176
+2025-10-11 19:05:49 | PID 538531 | RSS   242.3 MB | ITER 23 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:05:49 | PID 538531 | RSS   242.3 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:05:49 | PID 538531 | RSS   242.3 MB | masked_img created
+2025-10-11 19:05:49 | PID 538531 | RSS   242.3 MB | wrote tmp image /tmp/tmptc5ftr0j.jpg ok=True
+2025-10-11 19:06:55 | PID 538531 | RSS   242.3 MB | VLM returned in 65.22s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:06:55 | PID 538531 | RSS   242.3 MB | tmp file removed
+2025-10-11 19:06:55 | PID 538531 | RSS   242.3 MB | deltas computed
+2025-10-11 19:06:55 | PID 538531 | RSS   242.3 MB | fm_mean shape (1,)
+2025-10-11 19:06:55 | PID 538531 | RSS   242.3 MB | GP fit done
+2025-10-11 19:06:55 | PID 538531 | RSS   244.4 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:06:55 | PID 538531 | RSS   244.4 MB | mu.size=50176 expected=50176
+2025-10-11 19:06:55 | PID 538531 | RSS   244.4 MB | ITER 24 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:06:55 | PID 538531 | RSS   244.4 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:06:55 | PID 538531 | RSS   244.4 MB | masked_img created
+2025-10-11 19:06:55 | PID 538531 | RSS   244.4 MB | wrote tmp image /tmp/tmpxyif3yt4.jpg ok=True
+2025-10-11 19:06:59 | PID 538531 | RSS   244.4 MB | VLM returned in 4.60s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:06:59 | PID 538531 | RSS   244.4 MB | tmp file removed
+2025-10-11 19:06:59 | PID 538531 | RSS   244.4 MB | deltas computed
+2025-10-11 19:06:59 | PID 538531 | RSS   244.4 MB | fm_mean shape (1,)
+2025-10-11 19:06:59 | PID 538531 | RSS   244.4 MB | GP fit done
+2025-10-11 19:06:59 | PID 538531 | RSS   245.5 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:06:59 | PID 538531 | RSS   245.5 MB | mu.size=50176 expected=50176
+2025-10-11 19:06:59 | PID 538531 | RSS   249.9 MB | plotted
+2025-10-11 19:06:59 | PID 538531 | RSS   249.9 MB | ITER 25 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:06:59 | PID 538531 | RSS   249.9 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:06:59 | PID 538531 | RSS   249.9 MB | masked_img created
+2025-10-11 19:06:59 | PID 538531 | RSS   249.9 MB | wrote tmp image /tmp/tmpazfhqu1d.jpg ok=True
+2025-10-11 19:07:05 | PID 538531 | RSS   249.9 MB | VLM returned in 5.41s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:07:05 | PID 538531 | RSS   249.9 MB | tmp file removed
+2025-10-11 19:07:05 | PID 538531 | RSS   249.9 MB | deltas computed
+2025-10-11 19:07:05 | PID 538531 | RSS   249.9 MB | fm_mean shape (1,)
+2025-10-11 19:07:05 | PID 538531 | RSS   249.9 MB | GP fit done
+2025-10-11 19:07:05 | PID 538531 | RSS   243.7 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:07:05 | PID 538531 | RSS   243.7 MB | mu.size=50176 expected=50176
+2025-10-11 19:07:05 | PID 538531 | RSS   243.7 MB | ITER 26 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:07:05 | PID 538531 | RSS   243.7 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:07:05 | PID 538531 | RSS   243.7 MB | masked_img created
+2025-10-11 19:07:05 | PID 538531 | RSS   243.7 MB | wrote tmp image /tmp/tmpk_vbr1k0.jpg ok=True
+2025-10-11 19:07:10 | PID 538531 | RSS   243.7 MB | VLM returned in 4.70s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:07:10 | PID 538531 | RSS   243.7 MB | tmp file removed
+2025-10-11 19:07:10 | PID 538531 | RSS   243.7 MB | deltas computed
+2025-10-11 19:07:10 | PID 538531 | RSS   243.7 MB | fm_mean shape (1,)
+2025-10-11 19:07:10 | PID 538531 | RSS   243.7 MB | GP fit done
+2025-10-11 19:07:10 | PID 538531 | RSS   245.1 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:07:10 | PID 538531 | RSS   245.1 MB | mu.size=50176 expected=50176
+2025-10-11 19:07:10 | PID 538531 | RSS   245.1 MB | ITER 27 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:07:10 | PID 538531 | RSS   245.1 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:07:10 | PID 538531 | RSS   245.1 MB | masked_img created
+2025-10-11 19:07:10 | PID 538531 | RSS   245.1 MB | wrote tmp image /tmp/tmpykl7k_hw.jpg ok=True
+2025-10-11 19:07:15 | PID 538531 | RSS   245.1 MB | VLM returned in 5.21s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:07:15 | PID 538531 | RSS   245.1 MB | tmp file removed
+2025-10-11 19:07:15 | PID 538531 | RSS   245.1 MB | deltas computed
+2025-10-11 19:07:15 | PID 538531 | RSS   245.1 MB | fm_mean shape (1,)
+2025-10-11 19:07:15 | PID 538531 | RSS   245.1 MB | GP fit done
+2025-10-11 19:07:15 | PID 538531 | RSS   245.1 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:07:15 | PID 538531 | RSS   245.1 MB | mu.size=50176 expected=50176
+2025-10-11 19:07:15 | PID 538531 | RSS   243.0 MB | plotted
+2025-10-11 19:07:15 | PID 538531 | RSS   243.0 MB | ITER 28 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:07:15 | PID 538531 | RSS   243.0 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:07:15 | PID 538531 | RSS   243.0 MB | masked_img created
+2025-10-11 19:07:15 | PID 538531 | RSS   243.0 MB | wrote tmp image /tmp/tmp1ph8ylnb.jpg ok=True
+2025-10-11 19:07:21 | PID 538531 | RSS   243.0 MB | VLM returned in 5.51s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:07:21 | PID 538531 | RSS   243.0 MB | tmp file removed
+2025-10-11 19:07:21 | PID 538531 | RSS   243.0 MB | deltas computed
+2025-10-11 19:07:21 | PID 538531 | RSS   243.0 MB | fm_mean shape (1,)
+2025-10-11 19:07:21 | PID 538531 | RSS   243.0 MB | GP fit done
+2025-10-11 19:07:21 | PID 538531 | RSS   244.3 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:07:21 | PID 538531 | RSS   244.3 MB | mu.size=50176 expected=50176
+2025-10-11 19:07:21 | PID 538531 | RSS   244.3 MB | ITER 29 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:07:21 | PID 538531 | RSS   244.3 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:07:21 | PID 538531 | RSS   244.3 MB | masked_img created
+2025-10-11 19:07:21 | PID 538531 | RSS   244.3 MB | wrote tmp image /tmp/tmpdbmadtei.jpg ok=True
+2025-10-11 19:07:26 | PID 538531 | RSS   244.3 MB | VLM returned in 5.21s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:07:26 | PID 538531 | RSS   244.3 MB | tmp file removed
+2025-10-11 19:07:26 | PID 538531 | RSS   244.3 MB | deltas computed
+2025-10-11 19:07:26 | PID 538531 | RSS   244.3 MB | fm_mean shape (1,)
+2025-10-11 19:07:26 | PID 538531 | RSS   244.3 MB | GP fit done
+2025-10-11 19:07:26 | PID 538531 | RSS   244.3 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)
+2025-10-11 19:07:26 | PID 538531 | RSS   244.3 MB | mu.size=50176 expected=50176
+2025-10-11 19:21:21 | PID 538531 | RSS   257.7 MB | Starting loop
+2025-10-11 19:21:21 | PID 538531 | RSS   257.7 MB | ITER 0 start; len(Xm)=1; len(fm_dict)=6
+2025-10-11 19:21:21 | PID 538531 | RSS   257.7 MB | coords: (0, 5, 13, 17) img.shape=(224, 224, 3)
+2025-10-11 19:21:21 | PID 538531 | RSS   257.7 MB | masked_img created
+2025-10-11 19:21:21 | PID 538531 | RSS   257.7 MB | wrote tmp image /tmp/tmp38zliz51.jpg ok=True
+2025-10-11 19:21:26 | PID 538531 | RSS   257.7 MB | VLM returned in 4.91s; keys=['Image_Demo_ethnicity_Category', 'Image_Demo_age_Category', 'Image_Demo_sex_Category', 'Image_Demo_highest_educational_qualification_Category', 'Image_Demo_household_income_bracket_Category']
+2025-10-11 19:21:26 | PID 538531 | RSS   257.7 MB | tmp file removed
+2025-10-11 19:21:26 | PID 538531 | RSS   257.7 MB | deltas computed
+2025-10-11 19:21:26 | PID 538531 | RSS   257.7 MB | fm_mean shape (1,)
+2025-10-11 19:21:26 | PID 538531 | RSS   257.7 MB | GP fit done
+2025-10-11 19:21:26 | PID 538531 | RSS   257.7 MB | GP predict done mu.shape=(50176,) sig.shape=(50176,)

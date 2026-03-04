@@ -1,0 +1,30 @@
+{
+  "image_name": "suLLGY-y_400x400",
+  "num_features": 6,
+  "map_shape": {
+    "ethnicity": [
+      224,
+      224
+    ],
+    "age": [
+      224,
+      224
+    ],
+    "sex": [
+      224,
+      224
+    ],
+    "highest_educational_qualification": [
+      224,
+      224
+    ],
+    "household_income_bracket": [
+      224,
+      224
+    ],
+    "partisan_loyalties": [
+      224,
+      224
+    ]
+  }
+}
