@@ -1,0 +1,592 @@
+\pagenumbering{arabic}
+\counterwithin{table}{section}
+\counterwithin{figure}{section}
+\renewcommand{\thealgocf}{\thesection.\arabic{algocf}} % Format algorithms as A.1, A.2, etc.
+
+\renewcommand{\thelstlisting}{\thesection.\arabic{lstlisting}} % Format listings as A.1, A.2, etc.
+
+\setcounter{algocf}{0} % Restart algorithm counter
+\setcounter{lstlisting}{0} % Restart listing counter
+
+
+
+\begin{spacing}{1}
+
+\section{MrP Predictions Per Belief Across Demographic Subgroups and States}
+ % <<BEGIN_BELIEF_FIGURES>>
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/clz_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/clz_state.png}
+\end{subfigure}
+\caption{INCREASE FOSSIL FUEL PRODUCTION}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/crc_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/crc_state.png}
+\end{subfigure}
+\caption{OPINION ON FUNDING OF POLICE DEPARTMENTS}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/dra_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+% state plot not available for this belief
+\end{subfigure}
+\caption{OPINION ON MARIJUANA LEGALISATION}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/frb_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/frb_state.png}
+\end{subfigure}
+\caption{OPINION ON THE EXTENT TO WHICH THIS INDIVIDUAL FEELS IT IS JUSTIFIED FOR PEOPLE TO USE VIOLENCE TO PURSUE THEIR POLITICAL GOALS IN THIS COUNTRY}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/sod_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/sod_state.png}
+\end{subfigure}
+\caption{OPINION ON THE FOLLOWING STATEMENT' HOMOSEXUAL COUPLES SHOULD HAVE THE RIGHT TO MARRY ONE ANOTHER'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/sob_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/sob_state.png}
+\end{subfigure}
+\caption{OPINION ON THE FOLLOWING STATEMENT' IT SHOULD BE ACCEPTABLE FOR A PREGNANT WOMAN TO OBTAIN A LEGAL ABORTION IF A WOMAN WANTS IT FOR ANY REASON'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/hec_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/hec_state.png}
+\end{subfigure}
+\caption{OPINION ON THE FOLLOWING STATEMENT' OVERALL VACCINATIONS DO MORE HARM THAN GOOD'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/pra_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/pra_state.png}
+\end{subfigure}
+\caption{OPINION ON THE LARGE REDUCTION IN THE PERCENTAGE OF WORKERS REPRESENTED BY UNIONS}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/ima_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/ima_state.png}
+\end{subfigure}
+\caption{OPINION ON THE NUMBER OF IMMIGRANTS IN AMERICA}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/gua_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+% state plot not available for this belief
+\end{subfigure}
+\caption{OPINION ON THE STATEMENT' A PERSON SHOULD REQUIRE A POLICE PERMIT BEFORE HE OR SHE COULD BUY A GUN'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/rac_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/rac_state.png}
+\end{subfigure}
+\caption{OPINION ON THE STATEMENT' BECAUSE OF PAST DISCRIMINATION BLACK PEOPLE SHOULD BE GIVEN PREFERENCE IN HIRING AND PROMOTION'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/clg_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/clg_state.png}
+\end{subfigure}
+\caption{OPINION ON THE STATEMENT' CLIMATE CHANGE IS A MAJOR THREAT TO THE UNITED STATES'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/imb_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/imb_state.png}
+\end{subfigure}
+\caption{OPINION ON THE STATEMENT' IMMIGRANTS INCREASE CRIME RATES'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/imc_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/imc_state.png}
+\end{subfigure}
+\caption{OPINION ON THE STATEMENT' IMMIGRANTS TAKE JOBS AWAY FROM PEOPLE WHO WERE BORN IN THE USA'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/feb_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/feb_state.png}
+\end{subfigure}
+\caption{OPINION ON THE STATEMENT' IT IS MUCH BETTER FOR EVERYONE INVOLVED IF THE MAN IS THE ACHIEVER OUTSIDE THE HOME AND THE WOMAN TAKES CARE OF THE HOME AND FAMILY'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/fea_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+% state plot not available for this belief
+\end{subfigure}
+\caption{OPINION ON THE STATEMENT' MEN ARE BETTER SUITED EMOTIONALLY FOR POLITICS THAN ARE MOST WOMEN'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/isc_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/isc_state.png}
+\end{subfigure}
+\caption{OPINION ON THE STATEMENT' THE US SHOULD PROVIDE MILITARY AID TO ISRAEL TO HELP IN ITS WAR AGAINST HAMAS'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/frc_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/frc_state.png}
+\end{subfigure}
+\caption{OPINION ON THE STATEMENT' THE USE OF PUBERTY BLOCKERS AND OTHER GENDERAFFIRMING PROCEDURES FOR MINORS SHOULD BE ALLOWED'}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/imd_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/imd_state.png}
+\end{subfigure}
+\caption{OPINION ON WHAT SHOULD BE DONE WITH ILLEGAL IMMIGRANTS}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/cra_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+% state plot not available for this belief
+\end{subfigure}
+\caption{OPINION ON WHETHER COURTS IN THE USERS S AREA DEAL TOO HARSHLY OR NOT HARSHLY ENOUGH WITH CRIMINALS}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/soa_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+% state plot not available for this belief
+\end{subfigure}
+\caption{OPINION ON WHETHER DIVORCE IN THE USA SHOULD BE EASIER OR MORE DIFFICULT TO OBTAIN THAN IT IS}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/ukc_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/ukc_state.png}
+\end{subfigure}
+\caption{OPINION ON WHETHER THE US HAS A RESPONSIBILITY TO HELP UKRAINE DEFEND ITSELF FROM RUSSIA S INVASION}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/raa_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/raa_state.png}
+\end{subfigure}
+\caption{OPINION ON WHETHER WHITE PEOPLE BENEFIT FROM SOCIETAL ADVANTAGES NOT AVAILABLE TO BLACK PEOPLE}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/isa_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/isa_state.png}
+\end{subfigure}
+\caption{OPINION ON WHICH SIDE HAS MORE VALID REASONS IN THE ISRAELHAMAS WAR}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/dea_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/dea_state.png}
+\end{subfigure}
+\caption{SATISFACTION WITH THE WAY DEMOCRACY IS WORKING IN THE US}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/ded_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/ded_state.png}
+\end{subfigure}
+\caption{TRUST IN THE INFORMATION THAT COMES FROM ESTABLISHED NEWS ORGANIZATIONS}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/dee_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+% state plot not available for this belief
+\end{subfigure}
+\caption{TRUST IN THE INFORMATION THAT COMES FROM INDEPENDENT MEDIA SOURCES INCLUDING PODCASTS BLOGS SOCIALMEDIA ETC}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{demographics/hea_demographics.png}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\includegraphics[width=\linewidth]{state/hea_state.png}
+\end{subfigure}
+\caption{WILLINGNESS TO PAY HIGHER TAXES TO IMPROVE THE LEVEL OF HEALTH CARE FOR ALL PEOPLE IN THE UNITED STATES}
+\end{figure}
+\end{landscape}
+\clearpage
+
+% <<END_BELIEF_FIGURES>>
+
+\section{National MrP Predictions Overtime Trend}
+% here we might want to compute the evaluation metrics per target dataset but we haven't decided yet
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{national_plots/national_overtime_trend.png}
+    \caption{ National MrP Predictions Overtime Trend}
+    \label{fig:plot1}
+\end{figure}
+
+\section{Time Window Selection}
+\begin{table}[htbp]
+\centering
+\caption{Summary Speculation Score by Time Window Size}
+\begin{tabular}{lccccc}
+\toprule
+ & \textbf{7 days} & \textbf{14 days} & \textbf{21 days} & \textbf{30 days} & \textbf{60 days} \\
+\midrule
+Total Windows                & 618   & 620   & 614   & 615   & 588   \\
+Empty Windows                & 364   & 340   & 321   & 302   & 268   \\
+Coverage (\%)                & 41.1  & 45.2  & 47.7  & 50.9  & 54.4  \\
+Mean Inpool Speculation      & 62.085 & 59.015 & 59.479 & 59.582 & 56.735 \\
+Std Inpool Speculation       & 26.659 & 27.210 & 27.468 & 27.002 & 28.650 \\
+Mean Outpool Speculation     & 71.810 & 69.504 & 71.814 & 69.896 & 69.956 \\
+Std Outpool Speculation      & 22.876 & 23.078 & 22.071 & 24.669 & 25.017 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\section{Model Selection}
+\subsection{General Observations}
+\begin{itemize}
+    \item \textbf{Medium tweets (20 total):}
+    \begin{itemize}
+        \item Phi4 almost always selects the neutral option.
+        \item Llama sometimes selects neutral options.
+        \item GPT-OSS almost never selects neutral.
+    \end{itemize}
+    
+    \item \textbf{Rich tweets (88 total):}
+    \begin{itemize}
+        \item All models produced the same belief inference, but speculation scores and interpretations differ.
+    \end{itemize}
+    
+    \item \textbf{Model tendencies:}
+    \begin{itemize}
+        \item Phi4 captures many details but can get lost in them.
+        \item Llama is concise but sometimes omits or misinterprets important points.
+        \item GPT-OSS is the most consistent and stable overall.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Model Analysis}
+
+\subsubsection{Phi4}
+\textbf{Strengths}
+\begin{itemize}
+    \item Reasoning chains are thorough and reflect available information.
+    \item Generally follows guidelines when answering.
+\end{itemize}
+
+\textbf{Weaknesses}
+\begin{itemize}
+    \item Does not strictly follow the required answer format.
+    \item Long reasoning chains may waste tokens.
+\end{itemize}
+
+\textbf{By tweet type}
+\begin{itemize}
+    \item \textbf{Sparse:} Results may be incomplete, but inference is logical.
+    \item \textbf{Medium:} Almost always selects neutral.
+    \item \textbf{Rich:} Correctly identifies political leaning, but reasoning may contain inaccuracies (e.g., confusion between gender and race).
+    \item \textbf{Very rich:} Struggles with large inputs; token limits can truncate outputs.
+\end{itemize}
+
+\subsubsection{Llama}
+\textbf{Strengths}
+\begin{itemize}
+    \item Clear analysis and concise reasoning.
+    \item Effectively summarizes key observations.
+\end{itemize}
+
+\textbf{Weaknesses}
+\begin{itemize}
+    \item Does not strictly follow the required format.
+    \item May ignore or misinterpret key evidence (e.g., sarcasm).
+\end{itemize}
+
+\textbf{By tweet type}
+\begin{itemize}
+    \item \textbf{Sparse:} May produce arbitrary results instead of neutral.
+    \item \textbf{Medium:} Less likely than Phi4 to choose neutral.
+    \item \textbf{Rich:} Accurately identifies political leaning with reasonable speculation scores.
+    \item \textbf{Very rich:} Occasionally misinterprets attributes (e.g., age).
+\end{itemize}
+
+\subsubsection{GPT-OSS}
+\textbf{Strengths}
+\begin{itemize}
+    \item Strictly follows the required answer format.
+    \item Sensitive to subtle political cues (e.g., detecting coded language missed by others).
+    \item Rarely selects neutral, except when no relevant information exists.
+\end{itemize}
+
+\textbf{Weaknesses}
+\begin{itemize}
+    \item Tends to assign lower speculation scores overall.
+\end{itemize}
+
+\subsection{Example: Speculation Score Differences}
+
+\textbf{Race-related issues}
+\begin{itemize}
+    \item Phi4: Medium-high speculation (based on inferred political stance).
+    \item Llama: Medium-low speculation (political leaning seen as only suggestive).
+\end{itemize}
+
+\textbf{Israel/Hamas issue}
+\begin{itemize}
+    \item Phi4: Medium-low speculation (one related tweet present).
+    \item Llama: Medium-high speculation (argues the tweet is not directly about the conflict).\textit{Example tweet:} ``HERO: President of Pomona College Suspends Radical Anti-Israel Students and Has Them Arrested (VIDEO)''
+\end{itemize}
+
+\subsection{Issue with gpt-oss -- internal inconsistency}
+Stance: White people benefit a great deal from societal advantages not available to black people\\
+Explanation: The user’s profile explicitly states “Strong Christian morals and values, with conservative Republican worth.” Their tweet history is filled with right‑leaning, pro‑Trump, anti‑left content from outlets such as Breitbart, Gateway Pundit, and OANN. While the tweets never directly address race‑based privilege, the pattern of aligning with conservative media that often downplays systemic racism strongly suggests the user would endorse the view that white people receive substantial societal advantages. This inference is indirect but consistent with the ideological cues present.\\
+Unless the model picked up that somehow the user is like a white supremacist and that they're happy about white poeple being advantaged. it doesn't make that much sense because the republicna position is that they're not, that everyone's on the same level playing field so to speak
+
+\section{Prompt Selection}
+
+\begin{table}[htbp]
+\centering
+\caption{Prompt Comparison Across Metrics}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{PoSSUM} & \textbf{CoT} & \textbf{CoS} \\
+\midrule
+Faithfulness     & 3.500 & 3.375 & 3.250 \\
+Logic            & 3.938 & 3.688 & 3.875 \\
+Speculation      & 4.062 & 3.750 & 3.562 \\
+Stance Cues      & 3.750 & 3.875 & 3.875 \\
+\midrule
+Preference Count & 4     & 5     & 3     \\
+\bottomrule
+\end{tabular}
+\end{table}
+% Print references that appear *only* in this refsection
+\pagebreak
+\pagebreak
+\Urlmuskip=0mu plus 1mu\relax
+
+\bibliographystyleapp{unsrtnat}
+\bibliographyapp{bibliography.bib}
+
+\end{spacing}{}
+
