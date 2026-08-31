@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "is-culture-king-scripts"
+version = "0.1.0"
+description = "Analysis and feature extraction scripts for is_culture_king_scripts"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "azure-identity>=1.19.0",
+    "cmdstanpy>=1.2.5",
+    "geopandas>=1.0.0",
+    "ipykernel>=6.29.5",
+    "jupyter>=1.1.1",
+    "libpysal>=4.13.0",
+    "matplotlib>=3.9.0",
+    "networkx>=3.3",
+    "numpy>=2.0.0",
+    "openai>=1.59.0",
+    "pandas>=2.2.0",
+    "pydantic>=2.10.0",
+    "requests>=2.32.0",
+    "scikit-learn>=1.6.0",
+    "scipy>=1.14.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["is_culture_king_scripts"]
