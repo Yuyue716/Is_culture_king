@@ -18,9 +18,7 @@ to this script.
 """
 import json
 import os
-import re
 import time
-import unicodedata
 
 import pandas as pd
 import requests
@@ -55,21 +53,6 @@ if not api_key:
 # same helpers / prompt as 2.extract_belief_features.ipynb
 # (kept in sync manually -- update here if the notebook's prompt_template changes)
 # ------------------------------------------------------------
-def normalize_text(text):
-    if not text:
-        return text
-    text = str(text)
-    text = text.replace("*", "").replace("<<", "").replace(">>", "")
-    text = re.sub(r"[-‐-―−﹘﹣－]", "", text)
-    normalized = unicodedata.normalize("NFKD", text)
-    ascii_text = normalized.encode("ASCII", "ignore").decode("ASCII")
-    return " ".join(ascii_text.split()).lower()
-
-
-def make_safe_key(title):
-    return re.sub(r"\W+", "_", normalize_text(title)).strip("_")
-
-
 prompt_template = """
 A social media account has the following username, name, description:
 - Name: {name}
@@ -81,51 +64,41 @@ Furthermore, they self-report their location in their bio as: {location}
 The amount of followers they have is: {followers}
 They have written the following tweet(s): {tweets}
 
-Below is a list of categories; each title (e.g. "AGE:" or "SEX:") is followed by a set of options, each labeled with a symbol (e.g. "A1", "A2", or "E1").
-Please select, for each title, the most likely option to which this user belongs to.
+Below is a list of survey questions; each question is followed by a set of options, each labeled with a symbol (e.g. "A1", "A2", etc.).
+Please select, for each question, the most likely option for this user.
 
-For each selected symbol/category, rate the Speculation level (0-100): how little the user data supports the selection.
-
-Scale:
+For each selected option/symbol, rate the speculation level (0-100), using the following scale:
 - 0-20: Explicit, direct evidence (e.g., stated in profile/tweets)
 - 21-40: Strong indirect indicators
 - 41-60: Partial hints or mixed evidence
 - 61-80: Weak, limited indicators
 - 81-100: No meaningful evidence
 
-For each category, explain in detail which data features drove your choice and speculation level.
+Your answer should pertain only to the information available in the user data -- namely the username, name, description, location, amount of followers, profile picture and tweets from this user -- and should not be affected by additional information available to you from any other source.
 
-Use the exact title text shown in the schema for the title field.
-Do not omit any category and do not add extra commentary.
-Your answer should pertain only to the information available in the user data -- namely the username, name, description, location, profile picture and tweets from this user -- and should not be affected by additional information available to you from any other source.
-
-The categories are:
+The survey questions are:
 """
 
 
 def categories_text_for(features):
     return "\n".join(
-        f"- {f['title']}: Choose one of [{', '.join(f'{k}) {v}' for k, v in f['options'].items())}]"
+        f"- {f['title']}: Choose one of [{', '.join(f'{i + 1}) {text}' for i, text in enumerate(f['options']))}]"
         for f in features
     )
 
 
 def build_assessment_schema(feature):
-    symbol_options = [str(s) for s in feature["options"].keys()]
-    category_options = [str(c) for c in feature["options"].values()]
+    symbol_options = [str(i + 1) for i in range(len(feature["options"]))]
+    category_options = list(feature["options"])
     return {
         "type": "object",
         "properties": {
             "title": {"type": "string", "enum": [feature["title"]]},
-            # no `pattern` here -- confirmed via real testing that this backend enforces `pattern`
-            # as a FULLMATCH, which either mangles the explanation (narrow pattern) or breaks JSON
-            # termination (wildcard pattern). Quality-checked downstream instead.
-            "explanation": {"type": "string", "minLength": 1},
             "symbol": {"type": "string", "enum": symbol_options},
             "category": {"type": "string", "enum": category_options},
             "speculation": {"type": "integer", "minimum": 0, "maximum": 100},
         },
-        "required": ["title", "explanation", "symbol", "category", "speculation"],
+        "required": ["title", "symbol", "category", "speculation"],
         "additionalProperties": False,
     }
 
@@ -133,9 +106,9 @@ def build_assessment_schema(feature):
 def build_response_schema(features, schema_name):
     properties, required = {}, []
     for feature in features:
-        safe_key = make_safe_key(feature["title"])
-        properties[safe_key] = build_assessment_schema(feature)
-        required.append(safe_key)
+        key = feature["id"]  # matching-target id (e.g. GSS/ANES/CCES code) -- unique per question
+        properties[key] = build_assessment_schema(feature)
+        required.append(key)
     return {
         "name": schema_name,
         "strict": True,
@@ -211,8 +184,11 @@ def run_test():
     results = []
     for _, row in test_rows.iterrows():
         prompt = build_prompt(row, belief_categories_text)
+        # no "system" message -- matches 2.extract_belief_features.ipynb's infer_beliefs():
+        # gpt-oss's harmony format reserves the system slot for model-level settings we
+        # already set via separate request params, and this backend doesn't support a
+        # "developer" role either (confirmed via HTTP 422 in real testing).
         messages = [
-            {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt},
         ]
         body = {

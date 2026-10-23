@@ -55,32 +55,25 @@ Furthermore, they self-report their location in their bio as: {location}
 The amount of followers they have is: {followers}
 They have written the following tweet(s): {tweets}
 
-I will show you a number of categories to which this user may belong to.
-The categories are preceded by a title (e.g. "AGE:" or "SEX:" etc.) and a symbol (e.g. "A1", "A2" or "E1" etc.).
-Please select, for each title, the most likely category to which this user belongs to.
+Below is a list of survey questions; each question is followed by a set of options, each labeled with a symbol (e.g. "A1", "A2", etc.).
+Please select, for each question, the most likely option for this user.
 
-For each selected symbol/category, rate the Speculation level (0-100): how little the user data supports the selection.
-
-Scale:
+For each selected option/symbol, rate the speculation level (0-100), using the following scale:
 - 0-20: Explicit, direct evidence (e.g., stated in profile/tweets)
 - 21-40: Strong indirect indicators
 - 41-60: Partial hints or mixed evidence
 - 61-80: Weak, limited indicators
 - 81-100: No meaningful evidence
 
-For each category, explain in detail which data features drove your choice and speculation level.
+Your answer should pertain only to the information available in the user data -- namely the username, name, description, location, amount of followers, profile picture and tweets from this user -- and should not be affected by additional information available to you from any other source.
 
-Use the exact title text shown in the schema for the title field.
-Do not omit any category and do not add extra commentary.
-Your answer should pertain only to the information available in the user data -- namely the username, name, description, location, profile picture and tweets from this user -- and should not be affected by additional information available to you from any other source.
-
-The categories are:
+The survey questions are:
 """
 
 
 def categories_text_for(features):
     return "\n".join(
-        f"- {f['title']}: Choose one of [{', '.join(f'{k}) {v}' for k, v in f['options'].items())}]"
+        f"- {f['title']}: Choose one of [{', '.join(f'{i + 1}) {text}' for i, text in enumerate(f['options']))}]"
         for f in features
     )
 
