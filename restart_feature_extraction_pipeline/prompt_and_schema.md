@@ -1,7 +1,7 @@
 
 # Prompt and structured-output schema (7-day-window extraction)
 
-This is exactly what `2.extract_belief_features.ipynb` sent to `gpt-oss-120b` in the 7-day-window run (completed 2026-10-23). Each non-empty user-window gets two calls with the same prompt template and different question lists: one with the 40 belief questions and one with the 10 demographic questions. Empty windows are not sent to the model.
+This is exactly what `2.extract_belief_features.ipynb` sent to `gpt-oss-120b` in the 7-day-window run (completed 2026-10-23; the 1,530 windows containing duplicate tweets were re-run on 2026-11-05 after the duplicates were removed). Each non-empty user-window gets two calls with the same prompt template and different question lists: one with the 40 belief questions and one with the 10 demographic questions. Empty windows are not sent to the model.
 
 ## Prompt template
 
@@ -172,7 +172,7 @@ The following are retried **without** counting as an attempt, because they say n
 - **HTTP 429 (rate limiting):** waits for the `Retry-After` period.
 - **Network errors** (connection failures, timeouts, connections broken mid-response): waits 15 s, 30 s, 60 s and so on, up to a 300 s cap.
 
-The full run needed retries on only 29 belief calls and 2 demo calls.
+In the final results, only 25 belief calls and 2 demo calls needed more than one attempt.
 
 ## Context-length handling
 
@@ -184,7 +184,7 @@ The model's context window is 131,072 tokens.
   - That only happens if the room left is at least `200 × (number of questions) + 1000` tokens: 9,000 for belief and 3,000 for demo. That floor is based on the largest outputs seen in the pilot (about 11K tokens for belief, about 2K for demo).
   - With less room the call is skipped, because the answer would be cut off.
 
-Skipped calls are recorded as `context_length_exceeded: <error text>` in `Belief_Skip_Reason` / `Demo_Skip_Reason`. In the full run, 40 belief calls and 36 demo calls out of 19,782 non-empty windows were skipped this way.
+Skipped calls are recorded as `context_length_exceeded: <error text>` in `Belief_Skip_Reason` / `Demo_Skip_Reason`. In the final results, 4 belief calls and 2 demo calls out of 19,782 non-empty windows were skipped this way.
 
 ## Output columns
 
