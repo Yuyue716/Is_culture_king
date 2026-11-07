@@ -10,3 +10,9 @@ restart_feature_extraction_pipeline/token_usage_diagnostic_retry_cause.txt
 restart_feature_extraction_pipeline/token_usage_diagnostic_verbose_row.csv
 restart_feature_extraction_pipeline/warning_line_realrow_test.txt
 restart_feature_extraction_pipeline/warning_line_test.txt
+
+# Python bytecode caches
+__pycache__/
+
+# Private notes, not part of the code
+response_to_coauthors.md
