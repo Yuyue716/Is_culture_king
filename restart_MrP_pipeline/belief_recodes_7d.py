@@ -3,7 +3,7 @@ Belief recodes shared by the 7-day-window cleaning notebooks.
 
 Used by:
   - 1.feature_extraction_data_cleaning_7d.ipynb  (our LLM extraction)
-  - 18.build_target_df_7d.ipynb                  (ANES / GSS / CCES targets)
+  - 2.build_target_df_7d.ipynb                   (ANES / GSS / CCES targets)
 
 Both sides must apply exactly the same recode, otherwise the MrP estimates
 and the survey targets end up on different scales. That's why the rules live
