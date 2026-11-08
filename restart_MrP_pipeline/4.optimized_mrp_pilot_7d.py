@@ -1004,6 +1004,7 @@ def summarize_category_probability_draws(group_draws, group_col):
 
 PREDICTION_PIPELINE_VERSION = "mrp-python-fixes-1-2-4-v2-ev-parquet"
 GQ_ATTEMPTS = 5   # retries a window whose GQ chains crash at process startup on Windows
+GQ_SIG_FIGS = 9   # GQ CSV precision; 18 digits made parsing ~4.5x slower, 9 is far below posterior sd
 
 def dataframe_signature(frame):
     """Fingerprint the loaded cell frame, including row order, labels and weights."""
@@ -1084,6 +1085,15 @@ def record_complete_window(window_dir, signature, window_label, required_files):
         "window_label": window_label,
         "files": sizes,
     })
+
+TIMING_COLUMNS = ["gq_stan", "gq_read", "gq_csv_gb", "gq_cleanup", "cell_parquet",
+                  "groups_national", "category_groups", "total"]
+
+def _append_timing(path, window_label, timing):
+    """One row per predicted window, kept in the local work dir (not Dropbox)."""
+    row = pd.DataFrame([{"window": window_label,
+                         **{k: round(timing.get(k, float("nan")), 3) for k in TIMING_COLUMNS}}])
+    row.to_csv(path, mode="a", header=not path.exists(), index=False)
 
 def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
                     work_dir, time_window_mapping, fit_metadata, args,
@@ -1182,19 +1192,24 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
         })
         print(f"[{index}/{len(windows_to_run)}] Generating predictions for {window_label}")
         started = time.time()
+        timing = {}
         gq = None
         for attempt in range(1, GQ_ATTEMPTS + 1):
             # Each call owns its scratch CSV directory, including after failed runs.
             gq_dir = Path(work_dir) / f"gq_{window_label}_{uuid.uuid4().hex[:12]}"
             gq_dir.mkdir(parents=True, exist_ok=False)
             try:
+                t0 = time.time()
                 gq = model.generate_quantities(
                     data=stan_data_pred, previous_fit=subset_paths,
-                    gq_output_dir=str(gq_dir), sig_figs=18,
+                    gq_output_dir=str(gq_dir), sig_figs=GQ_SIG_FIGS,
                 )
+                timing["gq_stan"] = time.time() - t0      # Stan computation + CSV writing
+                t0 = time.time()
                 cell_summary, expected_draws, probability_draws = extract_cell_predictions(
                     gq, strat_frame, belief, draw_plan, n_total_draws
                 )
+                timing["gq_read"] = time.time() - t0      # cmdstanpy CSV parsing + extraction
                 break
             except (RuntimeError, ValueError) as error:
                 # On Windows a chain process occasionally dies at startup (0xC0000005,
@@ -1203,12 +1218,18 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
                     raise
                 print(f"  GQ attempt {attempt} failed ({type(error).__name__}); retrying window")
             finally:
+                t0 = time.time()
+                timing["gq_csv_gb"] = sum(f.stat().st_size for f in gq_dir.rglob("*") if f.is_file()) / 1e9
                 gq = None
                 gc.collect()
                 shutil.rmtree(gq_dir, ignore_errors=True)
+                timing["gq_cleanup"] = time.time() - t0
 
+        t0 = time.time()
         with _atomic_output(window_dir / "cell_level_predictions.parquet", binary=True) as stream:
             cell_summary.to_parquet(stream, engine="pyarrow", compression="zstd", index=False)
+        timing["cell_parquet"] = time.time() - t0
+        t0 = time.time()
         draws_for_agg = expected_draws.merge(merge_meta, on="cell_id", how="left", validate="one_to_one")
         del cell_summary, expected_draws
 
@@ -1226,9 +1247,11 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
         atomic_write_csv(window_dir / "national_all_draws.csv", national_draws)
         atomic_write_csv(window_dir / "national_predictions.csv", national_summary)
         del draws_for_agg, national_draws, national_summary
+        timing["groups_national"] = time.time() - t0
 
         # Aggregate raw category probabilities before taking posterior summaries.
         # Every category uses the same population draw as the expected score.
+        t0 = time.time()
         for group_col, name in category_groups:
             category_draws = aggregate_category_probability_draws(
                 probability_draws, strat_frame, group_col, draw_plan
@@ -1239,9 +1262,14 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
             atomic_write_csv(window_dir / f"group_{name}_category_all_draws.csv", category_draws)
             atomic_write_csv(window_dir / f"group_{name}_category_probs.csv", category_summary)
             del category_draws, category_summary
+        timing["category_groups"] = time.time() - t0
         del probability_draws
         gc.collect()
         record_complete_window(window_dir, prediction_signature, window_label, required_files)
+        timing["total"] = time.time() - started
+        print("  timing (s): " + " | ".join(
+            f"{k} {v:.2f}" if k == "gq_csv_gb" else f"{k} {v:.0f}" for k, v in timing.items()))
+        _append_timing(Path(work_dir) / "prediction_timing.csv", window_label, timing)
         print(f"  Completed {window_label} in {(time.time() - started) / 60:.1f} min")
 
     # Rebuild time series from verified windows. An interrupted run can be resumed
