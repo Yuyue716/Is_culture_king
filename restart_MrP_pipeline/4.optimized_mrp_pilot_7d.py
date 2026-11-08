@@ -58,6 +58,10 @@ def parse_args(argv=None):
     parser.add_argument("--sampling", type=int, default=50)
     parser.add_argument("--thin", type=int, default=1,
                         help="keep 1 for valid diagnostics; subsample for prediction with --predict-every")
+    parser.add_argument("--adapt-delta", type=float, default=0.8,
+                        help="NUTS target acceptance (Stan default 0.8; the first pilot used 0.995)")
+    parser.add_argument("--max-treedepth", type=int, default=10,
+                        help="NUTS maximum tree depth (Stan default 10; the first pilot used 13)")
     parser.add_argument("--predict-every", type=int, default=4,
                         help="use every k-th saved draw per chain for generated quantities")
     parser.add_argument("--max-windows", type=int, default=None, help="predict only the first N windows (testing)")
@@ -68,7 +72,9 @@ def parse_args(argv=None):
     parser.add_argument("--export-stan-data", type=Path, default=None,
                         help="write the assembled Stan input JSON and exit before fitting")
     args = parser.parse_args(argv)
-    for name in ("chains", "sampling", "thin", "predict_every"):
+    if not 0.1 <= args.adapt_delta < 1:
+        parser.error("--adapt-delta must be in [0.1, 1)")
+    for name in ("chains", "sampling", "thin", "predict_every", "max_treedepth"):
         if getattr(args, name) < 1:
             parser.error(f"--{name.replace('_', '-')} must be positive")
     if args.warmup < 0 or (args.max_windows is not None and args.max_windows < 0):
@@ -604,6 +610,16 @@ def atomic_write_csv(path, frame, **kwargs):
     kwargs.setdefault("index", False)
     with _atomic_output(path) as stream:
         frame.to_csv(stream, **kwargs)
+
+def convergence_text(summary_df):
+    """R-hat / ESS lines for diagnose.txt and the terminal."""
+    rhat, ess_bulk, ess_tail = summary_df["R_hat"], summary_df["ESS_bulk"], summary_df["ESS_tail"]
+    return (
+        f"max R-hat: {rhat.max():.3f} ({rhat.idxmax()})\n"
+        f"R-hat > 1.01: {int((rhat > 1.01).sum())} of {len(rhat)} | > 1.05: {int((rhat > 1.05).sum())}\n"
+        f"min ESS_bulk: {ess_bulk.min():.0f} ({ess_bulk.idxmin()}) | "
+        f"min ESS_tail: {ess_tail.min():.0f} ({ess_tail.idxmin()})\n"
+    )
 
 def validate_fit_csv_files(fit):
     """Ensure the sampler CSV files needed by generated quantities still exist."""
@@ -1509,7 +1525,7 @@ def main(argv=None):
     sampling_settings = {
         "chains": args.chains, "parallel_chains": args.chains,
         "iter_warmup": args.warmup, "iter_sampling": args.sampling,
-        "thin": args.thin, "adapt_delta": 0.995, "max_treedepth": 13,
+        "thin": args.thin, "adapt_delta": args.adapt_delta, "max_treedepth": args.max_treedepth,
         "sig_figs": 18,
     }
     if args.export_stan_data is not None:
@@ -1533,6 +1549,11 @@ def main(argv=None):
     if args.stage in ("fit", "all"):
         if fit_metadata is not None:
             print(f"Verified fit matches model, data and sampler settings; reusing {fit_path}")
+            diag_path = Path(base_dir) / "diagnose.txt"
+            if diag_path.is_file():
+                print("Sampler diagnostics (saved):\n" + diag_path.read_text(encoding="utf-8"))
+            if Path(summary_path).is_file():
+                print(convergence_text(pd.read_csv(summary_path, index_col=0)))
         else:
             # Do not mix a new sampling attempt with an incomplete earlier attempt.
             if any(Path(global_model_dir).iterdir()):
@@ -1541,11 +1562,13 @@ def main(argv=None):
                     "Use a new --run-name to fit cleanly."
                 )
             print(f"Fitting full model once: N={len(df)}, J_time={J_time}, "
-                  f"{args.chains} chains x {args.warmup} warmup / {args.sampling} sampling, thin={args.thin}")
+                  f"{args.chains} chains x {args.warmup} warmup / {args.sampling} sampling, thin={args.thin}, "
+                  f"adapt_delta={args.adapt_delta}, max_treedepth={args.max_treedepth}")
             started = time.time()
             fit = model.sample(data=stan_data_base, **sampling_settings,
                                show_console=True, refresh=10, output_dir=global_model_dir)
-            print(f"Sampling took {(time.time() - started) / 60:.1f} min")
+            sampling_minutes = (time.time() - started) / 60
+            print(f"Sampling took {sampling_minutes:.1f} min")
             summary_df = fit.summary()
             atomic_write_csv(summary_path, summary_df, index=True)
             # Diagnostics need thin=1: E-BFMI uses consecutive-transition energy
@@ -1555,20 +1578,27 @@ def main(argv=None):
             mv = fit.method_variables()
             energy = mv["energy__"]
             ebfmi = (np.diff(energy, axis=0) ** 2).sum(axis=0) / ((energy - energy.mean(axis=0)) ** 2).sum(axis=0)
+            diagnostics = (
+                f"settings: {args.chains} chains x {args.warmup} warmup / {args.sampling} sampling, "
+                f"adapt_delta={args.adapt_delta}, max_treedepth={args.max_treedepth}\n"
+                f"wall time for sampling: {sampling_minutes:.1f} min\n"
+                f"divergent transitions: {int(mv['divergent__'].sum())} of {mv['divergent__'].size}\n"
+                f"draws at max treedepth ({args.max_treedepth}): "
+                f"{int((mv['treedepth__'] >= args.max_treedepth).sum())}\n"
+                f"treedepth per chain (max): {mv['treedepth__'].max(axis=0).astype(int).tolist()}\n"
+                f"stepsize per chain: {np.round(mv['stepsize__'][0], 5).tolist()}\n"
+                f"E-BFMI per chain (< 0.3 is a problem): {np.round(ebfmi, 3).tolist()}\n"
+                + convergence_text(summary_df)
+            )
             with _atomic_output(f"{base_dir}/diagnose.txt") as stream:
-                stream.write(f"divergent transitions: {int(mv['divergent__'].sum())} of {mv['divergent__'].size}\n")
-                stream.write(f"draws at max treedepth (13): {int((mv['treedepth__'] >= 13).sum())}\n")
-                stream.write(f"treedepth per chain (max): {mv['treedepth__'].max(axis=0).astype(int).tolist()}\n")
-                stream.write(f"stepsize per chain: {np.round(mv['stepsize__'][0], 5).tolist()}\n")
-                stream.write(f"E-BFMI per chain (< 0.3 is a problem): {np.round(ebfmi, 3).tolist()}\n")
+                stream.write(diagnostics)
+            print("Sampler diagnostics:\n" + diagnostics)
             fit_metadata = save_verified_fit(
                 fit, fit_path, metadata_path, fit_signature, sampling_settings,
                 software_versions={"cmdstanpy": cmdstanpy.__version__,
                                    "cmdstan": cmdstanpy.cmdstan_version()},
             )
             print(f"Saved verified fit to {global_model_dir}, summary to {summary_path}")
-            print("Largest R-hat:", summary_df["R_hat"].max().round(3),
-                  "| smallest ESS_bulk:", summary_df["ESS_bulk"].min().round(0))
     if args.stage == "fit":
         return
     if fit is None:
