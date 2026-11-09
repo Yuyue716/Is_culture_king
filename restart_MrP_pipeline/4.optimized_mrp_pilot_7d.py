@@ -31,6 +31,7 @@ settings or population inputs change.
 """
 
 import argparse
+from concurrent.futures import ProcessPoolExecutor
 from contextlib import contextmanager
 from datetime import date, datetime, timezone
 import gc
@@ -838,6 +839,53 @@ def _check_probability_values(probabilities):
     if not np.allclose(probabilities.sum(axis=-1), 1.0, rtol=0, atol=1e-5):
         raise ValueError("Cell category probabilities do not sum to one.")
 
+def _parse_stan_csv(path):
+    """Worker process: parse one CmdStan CSV with cmdstanpy's own parser."""
+    from cmdstanpy.utils import stancsv
+    _, header, lines = stancsv.parse_comments_header_and_draws(path)
+    if header is None or not lines:
+        raise ValueError(f"No draws in Stan CSV {path}")
+    return header.split(","), stancsv.csv_bytes_list_to_numpy(lines)
+
+
+class ParallelGQDraws:
+    """GQ chain CSVs parsed in parallel; stan_variable() returns cmdstanpy's
+    chain-major (draws, *dims) layout, so downstream code is unchanged."""
+
+    def __init__(self, csv_files, workers=None):
+        csv_files = [str(f) for f in csv_files]
+        workers = min(len(csv_files), workers or os.cpu_count() or 1)
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            parsed = list(pool.map(_parse_stan_csv, csv_files))
+        self.columns = parsed[0][0]
+        if any(cols != self.columns for cols, _ in parsed):
+            raise ValueError("GQ chain CSVs have different columns.")
+        if any(arr.shape[1] != len(self.columns) for _, arr in parsed):
+            raise ValueError("GQ chain CSV rows do not match the header.")
+        self.draws = np.concatenate([arr for _, arr in parsed], axis=0)
+
+    def stan_variable(self, name):
+        pattern = re.compile(rf"^{re.escape(name)}\.(\d+)(?:\.(\d+))?$")
+        cols, pos = [], []
+        for j, column in enumerate(self.columns):
+            match = pattern.match(column)
+            if match:
+                cols.append(j)
+                pos.append(tuple(int(g) - 1 for g in match.groups() if g is not None))
+        if not cols:
+            raise ValueError(f"{name} is not in the GQ output.")
+        shape = tuple(max(p[d] for p in pos) + 1 for d in range(len(pos[0])))
+        # CmdStan writes array elements column-major in consecutive columns; reshaping that
+        # block with order="F" is what cmdstanpy/stanio does, so the memory layout matches too
+        # (a C-order copy made category_groups ~30% slower).
+        expected = np.stack(np.unravel_index(np.arange(len(cols)), shape, order="F"), axis=1)
+        if (int(np.prod(shape)) != len(cols)
+                or not np.array_equal(np.array(pos), expected)
+                or not np.array_equal(np.array(cols), np.arange(cols[0], cols[0] + len(cols)))):
+            raise ValueError(f"{name} columns are not CmdStan's consecutive column-major block.")
+        return self.draws[:, cols[0]:cols[0] + len(cols)].reshape((-1,) + shape, order="F")
+
+
 def extract_cell_predictions(gq, strat_frame, belief_col, draw_plan, n_total_draws):
     """Extract the same fitted rows in each window, retaining their original IDs.
 
@@ -1086,7 +1134,7 @@ def record_complete_window(window_dir, signature, window_label, required_files):
         "files": sizes,
     })
 
-TIMING_COLUMNS = ["gq_stan", "gq_read", "gq_csv_gb", "gq_cleanup", "cell_parquet",
+TIMING_COLUMNS = ["gq_stan", "gq_parse", "gq_extract", "gq_csv_gb", "gq_cleanup", "cell_parquet",
                   "groups_national", "category_groups", "total"]
 
 def _append_timing(path, window_label, timing):
@@ -1194,6 +1242,7 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
         started = time.time()
         timing = {}
         gq = None
+        gq_draws = None
         for attempt in range(1, GQ_ATTEMPTS + 1):
             # Each call owns its scratch CSV directory, including after failed runs.
             gq_dir = Path(work_dir) / f"gq_{window_label}_{uuid.uuid4().hex[:12]}"
@@ -1206,10 +1255,13 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
                 )
                 timing["gq_stan"] = time.time() - t0      # Stan computation + CSV writing
                 t0 = time.time()
+                gq_draws = ParallelGQDraws(gq.runset.csv_files)
+                timing["gq_parse"] = time.time() - t0     # chain CSVs parsed in parallel processes
+                t0 = time.time()
                 cell_summary, expected_draws, probability_draws = extract_cell_predictions(
-                    gq, strat_frame, belief, draw_plan, n_total_draws
+                    gq_draws, strat_frame, belief, draw_plan, n_total_draws
                 )
-                timing["gq_read"] = time.time() - t0      # cmdstanpy CSV parsing + extraction
+                timing["gq_extract"] = time.time() - t0   # variable extraction, checks, cell summaries
                 break
             except (RuntimeError, ValueError) as error:
                 # On Windows a chain process occasionally dies at startup (0xC0000005,
@@ -1221,6 +1273,7 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
                 t0 = time.time()
                 timing["gq_csv_gb"] = sum(f.stat().st_size for f in gq_dir.rglob("*") if f.is_file()) / 1e9
                 gq = None
+                gq_draws = None
                 gc.collect()
                 shutil.rmtree(gq_dir, ignore_errors=True)
                 timing["gq_cleanup"] = time.time() - t0
