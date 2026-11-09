@@ -944,11 +944,43 @@ def _prediction_weights(frame, weight_col):
         raise ValueError(f"Population weights in {weight_col!r} must be finite and nonnegative.")
     return weights
 
-def _prediction_group_totals(codes, groups, weights, weight_col):
-    totals = np.bincount(codes, weights=weights, minlength=len(groups))
+def _weight_matrix(frame, weight_cols):
+    """(cells x draws) population weights, read and checked once per window."""
+    missing = [col for col in weight_cols if col not in frame]
+    if missing:
+        raise ValueError(f"Population weight columns are missing: {missing[:5]}")
+    weights = frame.loc[:, list(weight_cols)].to_numpy(dtype=float)
+    if not np.isfinite(weights).all() or np.any(weights < 0):
+        raise ValueError("Population weights must be finite and nonnegative.")
+    return weights
+
+def _stacked_group_indicator(frame, group_cols):
+    """Sparse 0/1 (groups x cells) matrix stacking every grouping, so one matrix product
+    sums all draws for all groupings. Each row adds its cells in cell order, as
+    np.bincount did, so the results are bit-identical to the old per-draw loop."""
+    from scipy import sparse
+    if len(set(group_cols)) != len(group_cols):
+        raise ValueError("Grouping columns must be distinct.")
+    n_cells = len(frame)
+    blocks, labels = [], []
+    for group_col in group_cols:
+        codes, groups = _prediction_group_codes(frame, group_col)
+        blocks.append(sparse.csr_matrix((np.ones(n_cells), (codes, np.arange(n_cells))),
+                                        shape=(len(groups), n_cells)))
+        labels.append((group_col, groups))
+    return sparse.vstack(blocks, format="csr"), labels
+
+def _group_totals(indicator, weights):
+    totals = indicator @ weights
     if not np.isfinite(totals).all() or np.any(totals <= 0):
-        raise ValueError(f"Population draw {weight_col!r} has a nonpositive or nonfinite group total.")
+        raise ValueError("A population draw has a nonpositive or nonfinite group total.")
     return totals
+
+def _split_groupings(stacked, labels):
+    start = 0
+    for group_col, groups in labels:
+        yield group_col, groups, stacked[start:start + len(groups)]
+        start += len(groups)
 
 def _expected_draw_columns(draws_df, weight_by_draw):
     if not draws_df.columns.is_unique:
@@ -958,20 +990,18 @@ def _expected_draw_columns(draws_df, weight_by_draw):
         raise ValueError("Expected-score draw columns do not match the shared population pairing.")
     return list(weight_by_draw)
 
-def aggregate_draws_by_group(draws_df, group_col, weight_by_draw):
-    """Aggregate each expected-score draw with its fixed paired population draw."""
+def aggregate_draws_by_groups(draws_df, group_cols, weight_by_draw):
+    """Aggregate each expected-score draw with its fixed paired population draw, for all
+    groupings at once. Returns {group_col: frame with group_col + draw columns}."""
     draw_cols = _expected_draw_columns(draws_df, weight_by_draw)
-    codes, groups = _prediction_group_codes(draws_df, group_col)
-    output = {group_col: groups}
-    for draw_col in draw_cols:
-        values = draws_df[draw_col].to_numpy(dtype=float)
-        if not np.isfinite(values).all():
-            raise ValueError(f"Expected-score draw {draw_col!r} contains nonfinite values.")
-        weight_col = weight_by_draw[draw_col]
-        weights = _prediction_weights(draws_df, weight_col)
-        totals = _prediction_group_totals(codes, groups, weights, weight_col)
-        output[draw_col] = np.bincount(codes, weights=values * weights, minlength=len(groups)) / totals
-    return pd.DataFrame(output)
+    values = draws_df.loc[:, draw_cols].to_numpy(dtype=float)
+    if not np.isfinite(values).all():
+        raise ValueError("Expected-score draws contain nonfinite values.")
+    weights = _weight_matrix(draws_df, [weight_by_draw[col] for col in draw_cols])
+    indicator, labels = _stacked_group_indicator(draws_df, group_cols)
+    means = (indicator @ (values * weights)) / _group_totals(indicator, weights)
+    return {group_col: pd.DataFrame({group_col: groups, **dict(zip(draw_cols, block.T))})
+            for group_col, groups, block in _split_groupings(means, labels)}
 
 def summarize_group_draws(group_draws_df, group_col):
     draw_cols = [col for col in group_draws_df if isinstance(col, str) and col.startswith("draw_")]
@@ -1008,11 +1038,12 @@ def national_draws_to_wide(national_draws, group_col="group"):
     wide.insert(0, group_col, "national")
     return wide
 
-def aggregate_category_probability_draws(prob_draws, strat_frame, group_col, draw_plan):
-    """Poststratify raw category draws with a common population draw across K.
-
-    Rows are (group, category), followed by the original posterior draw columns.
-    No cell-level posterior means are substituted for posterior draws here.
+def aggregate_category_probability_draws(prob_draws, strat_frame, group_cols, draw_plan):
+    """Poststratify raw category draws with a common population draw across K, for all
+    groupings at once. Returns {group_col: frame}; rows are (group, category), followed by
+    the original posterior draw columns. No cell-level posterior means are substituted for
+    posterior draws here. prob_draws must already be checked (extract_cell_predictions
+    checks the whole array once per window).
     """
     _, draw_cols = _validate_prediction_draw_plan(draw_plan)
     prob_draws = np.asarray(prob_draws)
@@ -1020,24 +1051,19 @@ def aggregate_category_probability_draws(prob_draws, strat_frame, group_col, dra
             or prob_draws.shape[:2] != (len(draw_cols), len(strat_frame))
             or prob_draws.shape[2] < 2):
         raise ValueError("Probability draw shape does not match the shared draw plan and cell frame.")
-    codes, groups = _prediction_group_codes(strat_frame, group_col)
     n_categories = prob_draws.shape[2]
-    output = {
-        group_col: np.repeat(np.asarray(groups), n_categories),
-        "category": np.tile(np.arange(1, n_categories + 1), len(groups)),
-    }
-    for position, (draw_col, weight_col) in enumerate(zip(draw_cols, draw_plan["weight_col"])):
-        cell_probabilities = prob_draws[position]
-        _check_probability_values(cell_probabilities)
-        weights = _prediction_weights(strat_frame, weight_col)
-        totals = _prediction_group_totals(codes, groups, weights, weight_col)
-        group_probabilities = np.empty((len(groups), n_categories))
-        for category in range(n_categories):
-            group_probabilities[:, category] = np.bincount(
-                codes, weights=weights * cell_probabilities[:, category], minlength=len(groups)
-            ) / totals
-        output[draw_col] = group_probabilities.reshape(-1)
-    return pd.DataFrame(output)
+    weights = _weight_matrix(strat_frame, draw_plan["weight_col"].tolist())
+    indicator, labels = _stacked_group_indicator(strat_frame, group_cols)
+    totals = _group_totals(indicator, weights)
+    probs = np.stack([(indicator @ (weights * prob_draws[:, :, k].T)) / totals
+                      for k in range(n_categories)], axis=1)   # (groups, categories, draws)
+    output = {}
+    for group_col, groups, block in _split_groupings(probs, labels):
+        frame = {group_col: np.repeat(np.asarray(groups), n_categories),
+                 "category": np.tile(np.arange(1, n_categories + 1), len(groups))}
+        frame.update(zip(draw_cols, block.reshape(len(groups) * n_categories, -1).T))
+        output[group_col] = pd.DataFrame(frame)
+    return output
 
 def summarize_category_probability_draws(group_draws, group_col):
     """Summarize probabilities after draw-wise poststratification."""
@@ -1286,8 +1312,10 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
         draws_for_agg = expected_draws.merge(merge_meta, on="cell_id", how="left", validate="one_to_one")
         del cell_summary, expected_draws
 
+        expected_by_group = aggregate_draws_by_groups(
+            draws_for_agg, [group_col for group_col, _ in expected_groups], weight_by_draw)
         for group_col, name in expected_groups:
-            group_draws = aggregate_draws_by_group(draws_for_agg, group_col, weight_by_draw)
+            group_draws = expected_by_group.pop(group_col)
             group_summary = summarize_group_draws(group_draws, group_col)
             atomic_write_csv(window_dir / f"group_{name}_all_draws.csv", group_draws)
             atomic_write_csv(window_dir / f"group_{name}_predictions.csv", group_summary)
@@ -1305,10 +1333,10 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
         # Aggregate raw category probabilities before taking posterior summaries.
         # Every category uses the same population draw as the expected score.
         t0 = time.time()
+        category_by_group = aggregate_category_probability_draws(
+            probability_draws, strat_frame, [group_col for group_col, _ in category_groups], draw_plan)
         for group_col, name in category_groups:
-            category_draws = aggregate_category_probability_draws(
-                probability_draws, strat_frame, group_col, draw_plan
-            )
+            category_draws = category_by_group.pop(group_col)
             category_summary = summarize_category_probability_draws(category_draws, group_col)
             category_draws["time_window_start"] = window
             category_summary["time_window_start"] = window
