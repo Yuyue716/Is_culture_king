@@ -8,15 +8,15 @@ with the same command:
   - a fit interrupted during sampling is moved to fit_incomplete_<time> and refitted
     (CmdStan cannot resume a half-finished run);
   - GQ scratch folders left by an interrupted window are deleted;
-  - beliefs with belief_done.ok are skipped (use --recheck to verify them again).
+  - beliefs with belief_done.ok are skipped (use --recheck to verify them again);
+  - a belief whose process crashes is resumed automatically up to BELIEF_RETRIES times.
 Do NOT edit 4.optimized_mrp_pilot_7d.py between restarts: its source hash is part of the
 prediction signature, so an edited script refuses to resume an existing prediction folder
 (then use a new --prediction-subdir). Settings must also stay the same between restarts.
-
-Run in PowerShell (16-core laptop):
+Run in PowerShell (8 chains by default on both laptops; predict-every becomes 20, still 400 draws):
   $env:PYTHONPATH="D:\\is_culture_king_scripts\\.venv\\Lib\\site-packages"
   D:\\cmdstan_conda\\micromamba.exe run -r D:\\cmdstan_conda\\root -p D:\\cmdstan_conda\\env <uv python.exe> D:\\is_culture_king_scripts\\restart_MrP_pipeline\\5.run_beliefs_7d.py --beliefs GRASS CC24_440a V241294x
-On the 8-core laptop add `--chains 8` (predict-every then becomes 20, still 400 draws).
+Beliefs fitted earlier with 16 chains (GRASS, CC24_440a, V241294x, WRKWAYUP, ABANY, CAPPUN, AFFRMACT): pass `--chains 16` to reuse those fits.
 Logs: D:\\mrp_7d_work\\<run-name>\\<belief>\\run_<time>.log, one line per run in D:\\mrp_7d_work\\<run-name>\\runs_log.csv.
 """
 import argparse
@@ -36,6 +36,7 @@ PIPELINE = HERE / "4.optimized_mrp_pilot_7d.py"
 GENERATED_DIR = Path(os.path.normpath(HERE / "../../Dropbox/is_culture_king/is_culture_king_Yuyue/generated_data"))
 WORK_ROOT = Path(os.path.normpath(HERE / "../../mrp_7d_work"))
 N_PREDICTION_DRAWS = 400
+BELIEF_RETRIES = 3   # rerun a belief whose pipeline process crashed; the fit and finished windows are reused
 
 
 def parse_args():
@@ -43,7 +44,7 @@ def parse_args():
     parser.add_argument("--beliefs", nargs="+", required=True, help="belief ids, e.g. GRASS CC24_440a V241294x")
     parser.add_argument("--run-name", default="td10_ad08_w1000_s1000")
     parser.add_argument("--prediction-subdir", default="predictions")
-    parser.add_argument("--chains", type=int, default=16)
+    parser.add_argument("--chains", type=int, default=8)
     parser.add_argument("--warmup", type=int, default=1000)
     parser.add_argument("--sampling", type=int, default=1000)
     parser.add_argument("--adapt-delta", type=float, default=0.8)
@@ -186,6 +187,13 @@ def main():
             status, code = "interrupted", None
             try:
                 code = run_logged(pipeline_command(args, belief), log_path)
+                for retry in range(1, BELIEF_RETRIES + 1):
+                    if code == 0:
+                        break
+                    print(f"  {belief} exited with code {code}; resuming in 60 s (retry {retry}/{BELIEF_RETRIES})")
+                    time.sleep(60)   # give Windows time to release memory from the crashed processes
+                    clean_interrupted_state(paths)
+                    code = run_logged(pipeline_command(args, belief), log_path)
                 status = "done" if code == 0 and paths["belief_done"].is_file() else (
                     "partial" if code == 0 else "failed")
             finally:

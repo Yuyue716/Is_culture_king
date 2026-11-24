@@ -54,7 +54,7 @@ def parse_args(argv=None):
     parser = argparse.ArgumentParser(description="7-day MrP pilot for one belief")
     parser.add_argument("--belief", required=True, help="belief id, e.g. GRASS, V241294x, CC24_440a")
     parser.add_argument("--stage", choices=["fit", "predict", "all"], default="all")
-    parser.add_argument("--chains", type=int, default=16)
+    parser.add_argument("--chains", type=int, default=8)
     parser.add_argument("--warmup", type=int, default=1000)
     parser.add_argument("--sampling", type=int, default=50)
     parser.add_argument("--thin", type=int, default=1,
@@ -845,7 +845,11 @@ def _parse_stan_csv(path):
     _, header, lines = stancsv.parse_comments_header_and_draws(path)
     if header is None or not lines:
         raise ValueError(f"No draws in Stan CSV {path}")
-    return header.split(","), stancsv.csv_bytes_list_to_numpy(lines)
+    # Return the array through a .npy file next to the CSV, not through the pipe: on Windows
+    # one large pipe write (hundreds of MB) can fail with WinError 1450.
+    npy_path = path + ".npy"
+    np.save(npy_path, stancsv.csv_bytes_list_to_numpy(lines))
+    return header.split(","), npy_path
 
 
 class ParallelGQDraws:
@@ -857,6 +861,7 @@ class ParallelGQDraws:
         workers = min(len(csv_files), workers or os.cpu_count() or 1)
         with ProcessPoolExecutor(max_workers=workers) as pool:
             parsed = list(pool.map(_parse_stan_csv, csv_files))
+        parsed = [(cols, np.load(npy_path)) for cols, npy_path in parsed]
         self.columns = parsed[0][0]
         if any(cols != self.columns for cols, _ in parsed):
             raise ValueError("GQ chain CSVs have different columns.")
@@ -1289,7 +1294,7 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
                 )
                 timing["gq_extract"] = time.time() - t0   # variable extraction, checks, cell summaries
                 break
-            except (RuntimeError, ValueError) as error:
+            except (RuntimeError, ValueError, OSError) as error:
                 # On Windows a chain process occasionally dies at startup (0xC0000005,
                 # empty console output) while the other chains finish normally.
                 if attempt == GQ_ATTEMPTS:
@@ -1297,7 +1302,7 @@ def run_predictions(model, fit, stan_data_base, strat_frame, belief, base_dir,
                 print(f"  GQ attempt {attempt} failed ({type(error).__name__}); retrying window")
             finally:
                 t0 = time.time()
-                timing["gq_csv_gb"] = sum(f.stat().st_size for f in gq_dir.rglob("*") if f.is_file()) / 1e9
+                timing["gq_csv_gb"] = sum(f.stat().st_size for f in gq_dir.rglob("*.csv") if f.is_file()) / 1e9
                 gq = None
                 gq_draws = None
                 gc.collect()
